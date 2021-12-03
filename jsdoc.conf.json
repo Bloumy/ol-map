@@ -1,0 +1,11 @@
+{
+    "source": {
+        "include": [
+            "README.md"
+        ],
+        "includePattern": ".+\\.(js|md)?$"
+    },
+    "opts": {
+        "destination": "./js-doc/"
+    }
+}
