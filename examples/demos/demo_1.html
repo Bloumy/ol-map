@@ -16,11 +16,18 @@
 <body>
     <div class="container-fluid">
         <h2>Démonstration 1</h2>
+        <div id="its-a-map"></div>
     </div>
 
     <script src="../../vendor/jquery/jquery.min.js"></script>
     <script src="../../vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../dist/app.min.js"></script>
+    <script src="../../dist/app.js"></script>
+
+    <script>
+        var divMap = $('#its-a-map').get(0);
+        var options = {};
+        jolieCarte.init(divMap, options);
+    </script>
 </body>
 
 </html>
