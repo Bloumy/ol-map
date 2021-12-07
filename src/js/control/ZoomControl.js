@@ -1,4 +1,4 @@
-import Zoom from 'ol/control/Zoom';
+import ol from 'ol';
 
 /**
  * Contrôle de zoom personnalisé
@@ -8,7 +8,7 @@ import Zoom from 'ol/control/Zoom';
  * @alias jolieCarte.control.ZoomControl
  * @memberof jolieCarte.control
  */
-class ZoomControl extends Zoom {
+class ZoomControl extends ol.control.Zoom {
 
     /**
      * @param {Object} opt_options

@@ -1,5 +1,4 @@
 
-import 'ol/ol.css';
 import "./css/main.css";
 
 import model from './js/model/index.js';

@@ -1,5 +1,4 @@
-import TileLayer from 'ol/layer/Tile';
-import XYZ from 'ol/source/XYZ';
+import ol from 'ol';
 
 import Viewer from '../model/Viewer';
 import ZoomControl from '../control/ZoomControl';
@@ -13,8 +12,8 @@ function map1(element, options) {
 
   var viewer = new Viewer(element, options);
 
-  var layers = [new TileLayer({
-    source: new XYZ({
+  var layers = [new ol.layer.Tile({
+    source: new ol.source.XYZ({
       url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     })
   })];

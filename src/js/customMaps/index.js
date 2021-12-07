@@ -1,7 +1,7 @@
 import map1 from './map1.js';
 
 /**
- * Liste des classes modèles
+ * Liste des cartes disponibles
  *
  * @namespace jolieCarte.customMaps
  * @memberof jolieCarte

@@ -1,6 +1,5 @@
 const webpack = require("webpack");
 const path = require("path");
-const CopyPlugin = require('copy-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -37,15 +36,6 @@ let config = {
     new CleanWebpackPlugin({
       verbose: true,
       dry: false
-    }),
-    new CopyPlugin({
-      patterns: [
-        /* jquery */
-        { context: './node_modules/', from: './jquery/dist', to: '../vendor/jquery' },
-        { context: './node_modules/', from: './bootstrap/dist', to: '../vendor/bootstrap' },
-        /* img */
-        // { context: './src/img/', from: '*.(png|gif|svg)', to: 'img/' },
-      ]
     }),
     new ESLintPlugin({
       extensions: ['js'],

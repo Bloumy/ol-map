@@ -19,14 +19,8 @@
   ],
   "author": "Alexis Hordé",
   "license": "ISC",
-  "dependencies": {
-    "bootstrap": "^5.1.3",
-    "jquery": "^3.6.0",
-    "ol": "^6.9.0"
-  },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^10.0.0",
     "css-loader": "^6.5.1",
     "css-minimizer-webpack-plugin": "^3.2.0",
     "eslint": "^8.3.0",

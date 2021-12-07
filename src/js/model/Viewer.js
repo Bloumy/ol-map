@@ -1,11 +1,4 @@
 /**
- * Openlayers
- * @external ol
- * @description Pluggin Openlayers
- * @see {@link https://openlayers.org/en/v6.9.0/apidoc/}
- */
-
-/**
  * JQuery
  * @external jQuery
  * @description Pluggin JQuery
@@ -13,10 +6,13 @@
  */
 import $ from 'jquery';
 
-
-import Map from 'ol/Map';
-import View from 'ol/View';
-import * as olProj from 'ol/proj';
+/**
+ * Openlayers
+ * @external ol
+ * @description Pluggin Openlayers
+ * @see {@link https://openlayers.org/en/v6.9.0/apidoc/}
+ */
+import ol from 'ol';
 
 
 /**
@@ -60,14 +56,14 @@ class Viewer {
         this.mapElement = $('<div class="jolie-carte"></div>');
         this.mapElement.appendTo(this.targetElement);
 
-        var center = olProj.transform([2.424722, 46.763056], this.dataProjection, this.mapProjection);
+        var center = ol.proj.transform([2.424722, 46.763056], this.dataProjection, this.mapProjection);
         var zoom = 6;
         var minZoomAllowed = 5;
         var maxZoomAllowed = 19;
 
-        this.map = new Map({
+        this.map = new ol.Map({
             target: this.mapElement.get(0),
-            view: new View({
+            view: new ol.View({
                 center: center,
                 zoom: zoom,
                 minZoom: minZoomAllowed,
