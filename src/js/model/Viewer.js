@@ -45,7 +45,6 @@ class Viewer {
         this.mapProjection = options.mapProjection || "EPSG:3857";
 
         this.createMap(options);
-        this.addCustomEvents();
     }
 
 
@@ -67,7 +66,7 @@ class Viewer {
         var maxZoomAllowed = 19;
 
         this.map = new Map({
-            target: this.mapElement.attr('id'),
+            target: this.mapElement.get(0),
             view: new View({
                 center: center,
                 zoom: zoom,
@@ -97,7 +96,7 @@ class Viewer {
      */
     addControls(controls) {
         for (var i in controls) {
-            this.addControls(controls[i]);
+            this.addControl(controls[i]);
         }
     }
 
@@ -173,44 +172,6 @@ class Viewer {
      */
     getDataProjection() {
         return this.dataProjection;
-    }
-
-
-    /**
-     * @description Ajoute divers évenements sur le Viewer
-     *
-     * @private
-     */
-    addCustomEvents() {
-        this.addChangeZoomEvent();
-    }
-
-    /**
-     * @description Ajoute le declenchement de l'evenement 'change:zoom' sur la vue de la carte
-     *
-     * @fires change:zoom
-     *
-     * @private
-     */
-    addChangeZoomEvent() {
-
-        this.getMap().getView().on("change:resolution", function (e) {
-            var oldZoom = parseInt(this.getZoomForResolution(e.oldValue));
-            var currentZoom = parseInt(this.getZoom());
-
-            if (oldZoom !== currentZoom) {
-
-                /**
-                 * @description Survient quand la carte change de niveau de zoom
-                 *
-                 * @event jolieCarte.model.Viewer#change:zoom
-                 * @type {Object}
-                 * @property {number} oldValue - Ancienne valeur de zoom
-                 * @property {number} value - Nouvelle valeur de zoom
-                 */
-                this.dispatchEvent({ type: 'change:zoom', oldValue: oldZoom, value: currentZoom });
-            }
-        });
     }
 }
 

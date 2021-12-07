@@ -91,6 +91,7 @@ let config = {
   },
   externals: {
     'jquery': '$',
+    'ol': 'ol',
   },
 }
 

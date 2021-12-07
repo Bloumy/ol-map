@@ -1,7 +1,7 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 375:
+/***/ 454:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -12,6 +12,9 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ src)
 });
+
+;// CONCATENATED MODULE: ./node_modules/ol/ol.css
+// extracted by mini-css-extract-plugin
 
 ;// CONCATENATED MODULE: external "$"
 const external_$_namespaceObject = $;
@@ -18649,7 +18652,6 @@ class Viewer {
         this.mapProjection = options.mapProjection || "EPSG:3857";
 
         this.createMap(options);
-        this.addCustomEvents();
     }
 
 
@@ -18671,7 +18673,7 @@ class Viewer {
         var maxZoomAllowed = 19;
 
         this.map = new ol_Map({
-            target: this.mapElement.attr('id'),
+            target: this.mapElement.get(0),
             view: new ol_View({
                 center: center,
                 zoom: zoom,
@@ -18701,7 +18703,7 @@ class Viewer {
      */
     addControls(controls) {
         for (var i in controls) {
-            this.addControls(controls[i]);
+            this.addControl(controls[i]);
         }
     }
 
@@ -18777,44 +18779,6 @@ class Viewer {
      */
     getDataProjection() {
         return this.dataProjection;
-    }
-
-
-    /**
-     * @description Ajoute divers évenements sur le Viewer
-     *
-     * @private
-     */
-    addCustomEvents() {
-        this.addChangeZoomEvent();
-    }
-
-    /**
-     * @description Ajoute le declenchement de l'evenement 'change:zoom' sur la vue de la carte
-     *
-     * @fires change:zoom
-     *
-     * @private
-     */
-    addChangeZoomEvent() {
-
-        this.getMap().getView().on("change:resolution", function (e) {
-            var oldZoom = parseInt(this.getZoomForResolution(e.oldValue));
-            var currentZoom = parseInt(this.getZoom());
-
-            if (oldZoom !== currentZoom) {
-
-                /**
-                 * @description Survient quand la carte change de niveau de zoom
-                 *
-                 * @event jolieCarte.model.Viewer#change:zoom
-                 * @type {Object}
-                 * @property {number} oldValue - Ancienne valeur de zoom
-                 * @property {number} value - Nouvelle valeur de zoom
-                 */
-                this.dispatchEvent({ type: 'change:zoom', oldValue: oldZoom, value: currentZoom });
-            }
-        });
     }
 }
 
@@ -24513,7 +24477,32 @@ var XYZ = /** @class */ (function (_super) {
 }(source_TileImage));
 /* harmony default export */ const source_XYZ = (XYZ);
 //# sourceMappingURL=XYZ.js.map
-;// CONCATENATED MODULE: ./src/js/createMap.js
+;// CONCATENATED MODULE: ./src/js/control/ZoomControl.js
+
+
+/**
+ * Contrôle de zoom personnalisé
+ *
+ * @extends {ol.control.Zoom}
+ *
+ * @alias jolieCarte.control.ZoomControl
+ * @memberof jolieCarte.control
+ */
+class ZoomControl extends control_Zoom {
+
+    /**
+     * @param {Object} opt_options
+     */
+    constructor(opt_options) {
+
+        const options = opt_options ? opt_options : {};
+
+        super(options);
+    }
+}
+
+/* harmony default export */ const control_ZoomControl = (ZoomControl);
+;// CONCATENATED MODULE: ./src/js/customMaps/map1.js
 
 
 
@@ -24524,20 +24513,49 @@ var XYZ = /** @class */ (function (_super) {
  * @param {HTMLElement} element
  * @param {object} options
  */
- function createMap(element, options){
-    options = $.extend({},options);
+function map1(element, options) {
+  options = $.extend({}, options);
 
-   var viewer = new model_Viewer(element, options);
+  var viewer = new model_Viewer(element, options);
 
-   viewer.addLayer(new Tile({
+  var layers = [new Tile({
     source: new source_XYZ({
       url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
     })
-  }));
+  })];
+
+  var controls = [new control_ZoomControl()];
+
+  viewer.addControls(controls);
+  viewer.addLayers(layers);
 
 }
 
-/* harmony default export */ const js_createMap = (createMap);
+/* harmony default export */ const customMaps_map1 = (map1);
+;// CONCATENATED MODULE: ./src/js/customMaps/index.js
+
+
+/**
+ * Liste des classes modèles
+ *
+ * @namespace jolieCarte.customMaps
+ * @memberof jolieCarte
+ */
+/* harmony default export */ const customMaps = ({
+    map1: customMaps_map1
+});
+;// CONCATENATED MODULE: ./src/js/control/index.js
+
+
+/**
+ * Liste des controles personnalisés
+ *
+ * @namespace jolieCarte.control
+ * @memberof jolieCarte
+ */
+/* harmony default export */ const control = ({
+    ZoomControl: control_ZoomControl
+});
 ;// CONCATENATED MODULE: ./src/index.js
 
 
@@ -24545,9 +24563,12 @@ var XYZ = /** @class */ (function (_super) {
 
 
 
+
+
 let jolieCarte = {
-    init: js_createMap,
+    customMaps: customMaps,
     model: model,
+    control: control
 };
 
 __webpack_require__.g.jolieCarte = jolieCarte;
@@ -24641,7 +24662,7 @@ var __webpack_exports__ = {};
 (() => {
 // Webpack Polyfill Injector
 function main() {
-    __webpack_require__(375);
+    __webpack_require__(454);
 }
 if (function() {
     return /* Element.prototype.classList */ !("document"in self&&"classList"in document.documentElement&&"Element"in self&&"classList"in Element.prototype&&function(){var e=document.createElement("span")
